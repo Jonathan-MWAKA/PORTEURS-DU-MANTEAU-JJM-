@@ -30,8 +30,25 @@
     >
 
 </head>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Porteurs JJM">
 
-
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js")
+            .then(function () {
+                console.log("Application prête pour le mode hors ligne.");
+            })
+            .catch(function (error) {
+                console.log("Erreur du service worker :", error);
+            });
+    });
+}
+</script>
 <body>
 
 

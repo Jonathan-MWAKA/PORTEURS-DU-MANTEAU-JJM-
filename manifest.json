@@ -1,0 +1,11 @@
+{
+  "name": "Porteurs du Manteau JJM",
+  "short_name": "Porteurs JJM",
+  "description": "Fils & Filles — La vérité qui impacte",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "orientation": "portrait",
+  "lang": "fr-FR"
+}

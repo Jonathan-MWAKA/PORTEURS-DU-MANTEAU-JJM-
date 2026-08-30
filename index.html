@@ -1,223 +1,139 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="theme-color"
-        content="#111827"
-    >
+    <meta name="theme-color" content="#000000">
 
-    <meta
-        name="description"
-        content="Porteurs du Manteau JJM - Fils & Filles"
-    >
+    <meta name="mobile-web-app-capable" content="yes">
 
-    <title>
-        Porteurs du Manteau JJM
-    </title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+    <meta name="apple-mobile-web-app-title" content="PORTEURS JJM">
+
+    <title>PORTEURS DU MANTEAU JJM</title>
+
+    <!-- Manifest de l'application -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icône de l'application -->
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="icônes/icon-192.png">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css">
 </head>
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Porteurs JJM">
 
-<script>
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-        navigator.serviceWorker.register("service-worker.js")
-            .then(function () {
-                console.log("Application prête pour le mode hors ligne.");
-            })
-            .catch(function (error) {
-                console.log("Erreur du service worker :", error);
-            });
-    });
-}
-</script>
 <body>
 
-
-    <!-- =================================================
-         EN-TÊTE
-    ================================================== -->
-
-    <header class="app-header">
-
-        <div class="brand">
-
-            <div class="brand-icon">
-                🔥
-            </div>
-
-            <div>
-
-                <h1>
-                    PORTEURS DU MANTEAU
-                </h1>
-
-                <p>
-                    FILS & FILLES
-                </p>
-
-            </div>
-
-        </div>
-
+    <header>
+        <h1>PORTEURS DU MANTEAU JJM 🔥</h1>
+        <p>LA VÉRITÉ QUI IMPACTE</p>
     </header>
 
+    <main>
 
+        <section id="accueil">
+            <h2>Bienvenue</h2>
 
-    <!-- =================================================
-         CONTENU PRINCIPAL
-    ================================================== -->
+            <p>
+                Bienvenue dans l'application
+                <strong>PORTEURS DU MANTEAU JJM</strong>.
+            </p>
 
-    <main id="content">
+            <p>
+                Une génération appelée à connaître,
+                vivre et transmettre la vérité.
+            </p>
 
-        <section class="welcome">
+            <button id="commencer">
+                COMMENCER 🔥
+            </button>
+        </section>
 
-            <div class="icon">
-                🔥
+        <section id="contenu" style="display: none;">
+
+            <h2>ENSEIGNEMENTS</h2>
+
+            <div class="lecon">
+                <h3>La saine doctrine</h3>
+
+                <p>
+                    La saine doctrine nous conduit à connaître
+                    la Parole de Dieu et à demeurer fermes
+                    dans la vérité.
+                </p>
+
+                <p>
+                    « Vous connaîtrez la vérité,
+                    et la vérité vous affranchira. »
+                </p>
+
+                <strong>Jean 8:32</strong>
             </div>
 
-            <h2>
-                Bienvenue
-            </h2>
+            <div class="lecon">
+                <h3>Connaître son identité en Christ</h3>
 
-            <p>
-                La vérité qui impacte.
-            </p>
+                <p>
+                    Notre identité ne doit pas être construite
+                    sur notre passé, nos blessures, nos échecs
+                    ou les paroles des hommes.
+                </p>
 
-            <p>
-                <strong>
-                    JONATHAN MWAKA
-                </strong>
-            </p>
+                <p>
+                    En Christ, nous devenons une nouvelle créature.
+                </p>
+
+                <strong>2 Corinthiens 5:17</strong>
+            </div>
+
+            <button id="retour">
+                RETOUR
+            </button>
 
         </section>
 
     </main>
 
+    <footer>
+        <p>JONATHAN MWAKA</p>
+        <p>© PORTEURS DU MANTEAU JJM</p>
+    </footer>
 
 
-    <!-- =================================================
-         NAVIGATION BASSE
-    ================================================== -->
-
-    <nav class="bottom-nav">
+    <!-- JavaScript principal -->
+    <script src="app.js"></script>
 
 
-        <button
-            class="nav-button active"
-            onclick="navigate('home')"
-        >
+    <!-- Activation du Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
 
-            <span>
-                🏠
-            </span>
+            window.addEventListener("load", function () {
 
-            <small>
-                Accueil
-            </small>
+                navigator.serviceWorker
+                    .register("./sw.js")
+                    .then(function () {
+                        console.log(
+                            "Service Worker activé avec succès."
+                        );
+                    })
+                    .catch(function (error) {
+                        console.log(
+                            "Erreur Service Worker :",
+                            error
+                        );
+                    });
 
-        </button>
+            });
 
-
-
-        <button
-            class="nav-button"
-            onclick="navigate('program')"
-        >
-
-            <span>
-                📅
-            </span>
-
-            <small>
-                Programme
-            </small>
-
-        </button>
-
-
-
-        <button
-            class="nav-button"
-            onclick="navigate('teachings')"
-        >
-
-            <span>
-                📖
-            </span>
-
-            <small>
-                Doctrine
-            </small>
-
-        </button>
-
-
-
-        <button
-            class="nav-button"
-            onclick="navigate('members')"
-        >
-
-            <span>
-                👥
-            </span>
-
-            <small>
-                Groupe
-            </small>
-
-        </button>
-
-
-
-        <button
-            class="nav-button"
-            onclick="navigate('profile')"
-        >
-
-            <span>
-                👤
-            </span>
-
-            <small>
-                Profil
-            </small>
-
-        </button>
-
-
-    </nav>
-
-
-
-    <!-- =================================================
-         SCRIPT
-    ================================================== -->
-
-    <script
-        src="app.js"
-    ></script>
-
+        }
+    </script>
 
 </body>
-
 </html>

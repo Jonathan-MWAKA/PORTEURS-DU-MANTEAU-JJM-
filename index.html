@@ -1,139 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#000000">
-
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <meta name="apple-mobile-web-app-title" content="PORTEURS JJM">
-
-    <title>PORTEURS DU MANTEAU JJM</title>
-
-    <!-- Manifest de l'application -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Icône de l'application -->
-    <link rel="icon" type="image/png" sizes="192x192"
-          href="icônes/icon-192.png">
-
-    <!-- Style -->
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <header>
-        <h1>PORTEURS DU MANTEAU JJM 🔥</h1>
-        <p>LA VÉRITÉ QUI IMPACTE</p>
-    </header>
-
-    <main>
-
-        <section id="accueil">
-            <h2>Bienvenue</h2>
-
-            <p>
-                Bienvenue dans l'application
-                <strong>PORTEURS DU MANTEAU JJM</strong>.
-            </p>
-
-            <p>
-                Une génération appelée à connaître,
-                vivre et transmettre la vérité.
-            </p>
-
-            <button id="commencer">
-                COMMENCER 🔥
-            </button>
-        </section>
-
-        <section id="contenu" style="display: none;">
-
-            <h2>ENSEIGNEMENTS</h2>
-
-            <div class="lecon">
-                <h3>La saine doctrine</h3>
-
-                <p>
-                    La saine doctrine nous conduit à connaître
-                    la Parole de Dieu et à demeurer fermes
-                    dans la vérité.
-                </p>
-
-                <p>
-                    « Vous connaîtrez la vérité,
-                    et la vérité vous affranchira. »
-                </p>
-
-                <strong>Jean 8:32</strong>
-            </div>
-
-            <div class="lecon">
-                <h3>Connaître son identité en Christ</h3>
-
-                <p>
-                    Notre identité ne doit pas être construite
-                    sur notre passé, nos blessures, nos échecs
-                    ou les paroles des hommes.
-                </p>
-
-                <p>
-                    En Christ, nous devenons une nouvelle créature.
-                </p>
-
-                <strong>2 Corinthiens 5:17</strong>
-            </div>
-
-            <button id="retour">
-                RETOUR
-            </button>
-
-        </section>
-
-    </main>
-
-    <footer>
-        <p>JONATHAN MWAKA</p>
-        <p>© PORTEURS DU MANTEAU JJM</p>
-    </footer>
-
-
-    <!-- JavaScript principal -->
-    <script src="app.js"></script>
-
-
-    <!-- Activation du Service Worker -->
-    <script>
-        if ("serviceWorker" in navigator) {
-
-            window.addEventListener("load", function () {
-
-                navigator.serviceWorker
-                    .register("./sw.js")
-                    .then(function () {
-                        console.log(
-                            "Service Worker activé avec succès."
-                        );
-                    })
-                    .catch(function (error) {
-                        console.log(
-                            "Erreur Service Worker :",
-                            error
-                        );
-                    });
-
-            });
-
-        }
-    </script>
-
-</body>
-</html>
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css"><title>Porteurs du Manteau JJM</title>
+</head><body>
+<header><b>✝ PORTEURS DU MANTEAU JJM</b><small>LA VÉRITÉ QUI IMPACTE</small></header>
+<main id="content"></main>
+<nav>
+<button onclick="navigate('home')">🏠<span>Accueil</span></button>
+<button onclick="navigate('teachings')">📖<span>Enseignements</span></button>
+<button onclick="navigate('prayer')">🙏<span>Prière</span></button>
+<button onclick="navigate('challenges')">🔥<span>Défis</span></button>
+<button onclick="navigate('profile')">👤<span>Profil</span></button>
+</nav>
+<script src="app.js"></script><script>
+if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));
+</script></body></html>

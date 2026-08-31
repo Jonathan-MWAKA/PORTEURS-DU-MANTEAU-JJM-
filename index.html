@@ -8,7 +8,8 @@
 
   <meta name="theme-color" content="#111827">
   <meta name="background-color" content="#111827">
-  <meta name="description" content="PORTEURS DU MANTEAU JJM — La vérité qui impacte.">
+  <meta name="description"
+        content="PORTEURS DU MANTEAU JJM — La vérité qui impacte.">
 
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
@@ -21,33 +22,45 @@
 
 <body>
 
-  <!-- Écran de démarrage -->
+  <!-- ÉCRAN DE DÉMARRAGE -->
   <div id="splash">
+
     <div class="splash-logo">✝</div>
+
     <h1>PORTEURS DU MANTEAU</h1>
+
     <p>LA VÉRITÉ QUI IMPACTE</p>
+
+    <div class="creator-splash">
+      Une application créée par
+      <strong>JONATHAN MWAKA</strong>
+    </div>
+
     <div class="loader"></div>
+
   </div>
 
-  <!-- Application -->
+
+  <!-- APPLICATION -->
   <div id="app">
 
     <header class="app-header">
 
       <div class="brand">
+
         <div class="brand-icon">✝</div>
 
         <div>
           <strong>PORTEURS DU MANTEAU</strong>
           <small>LA VÉRITÉ QUI IMPACTE</small>
         </div>
+
       </div>
 
       <button
         id="installButton"
         class="install-button"
-        style="display:none;"
-        aria-label="Installer l'application">
+        style="display:none;">
         ⬇️
       </button>
 
@@ -57,7 +70,23 @@
     <main id="content"></main>
 
 
-    <!-- Navigation -->
+    <!-- PIED DE PAGE -->
+    <footer class="app-footer">
+
+      <div class="footer-line"></div>
+
+      <strong>JONATHAN MWAKA</strong>
+
+      <p>Créateur de l'application</p>
+
+      <small>
+        © 2026 JONATHAN MWAKA — PORTEURS DU MANTEAU JJM
+      </small>
+
+    </footer>
+
+
+    <!-- NAVIGATION -->
     <nav class="bottom-navigation">
 
       <button
@@ -119,133 +148,151 @@
   </div>
 
 
-  <!-- Message -->
   <div id="toast"></div>
 
 
-  <!-- JavaScript principal -->
   <script src="./app.js"></script>
 
 
-  <!-- Installation PWA -->
   <script>
 
     let deferredPrompt = null;
 
-    window.addEventListener("beforeinstallprompt", function(event) {
 
-      event.preventDefault();
+    window.addEventListener(
+      "beforeinstallprompt",
+      function(event) {
 
-      deferredPrompt = event;
+        event.preventDefault();
 
-      const installButton =
-        document.getElementById("installButton");
+        deferredPrompt = event;
 
-      if (installButton) {
-        installButton.style.display = "block";
-      }
+        const button =
+          document.getElementById("installButton");
 
-    });
-
-
-    const installButton =
-      document.getElementById("installButton");
-
-    if (installButton) {
-
-      installButton.addEventListener("click", async function() {
-
-        if (!deferredPrompt) {
-          showToast("L'installation n'est pas encore disponible.");
-          return;
+        if (button) {
+          button.style.display = "block";
         }
 
-        deferredPrompt.prompt();
+      }
+    );
 
-        const result =
-          await deferredPrompt.userChoice;
 
-        if (result.outcome === "accepted") {
-          showToast("Application installée !");
+    document
+      .getElementById("installButton")
+      ?.addEventListener(
+        "click",
+        async function() {
+
+          if (!deferredPrompt) {
+
+            showToast(
+              "L'installation n'est pas encore disponible."
+            );
+
+            return;
+          }
+
+          deferredPrompt.prompt();
+
+          const result =
+            await deferredPrompt.userChoice;
+
+          if (result.outcome === "accepted") {
+
+            showToast(
+              "PORTEURS DU MANTEAU est installé !"
+            );
+
+          }
+
+          deferredPrompt = null;
+
+          this.style.display = "none";
+
+        }
+      );
+
+
+    window.addEventListener(
+      "appinstalled",
+      function() {
+
+        const button =
+          document.getElementById("installButton");
+
+        if (button) {
+          button.style.display = "none";
         }
 
-        deferredPrompt = null;
+        showToast(
+          "Application installée avec succès !"
+        );
 
-        installButton.style.display = "none";
-
-      });
-
-    }
-
-
-    window.addEventListener("appinstalled", function() {
-
-      const installButton =
-        document.getElementById("installButton");
-
-      if (installButton) {
-        installButton.style.display = "none";
       }
+    );
 
-      showToast("PORTEURS DU MANTEAU est installé !");
-
-    });
-
-
-    /* Service Worker */
 
     if ("serviceWorker" in navigator) {
 
-      window.addEventListener("load", function() {
+      window.addEventListener(
+        "load",
+        function() {
 
-        navigator.serviceWorker
-          .register("./service-worker.js", {
-            scope: "./"
-          })
-          .then(function(registration) {
+          navigator.serviceWorker
+            .register("./service-worker.js", {
+              scope: "./"
+            })
+            .then(function(registration) {
 
-            console.log(
-              "Service Worker actif :",
-              registration.scope
-            );
+              console.log(
+                "Service Worker actif :",
+                registration.scope
+              );
 
-          })
-          .catch(function(error) {
+            })
+            .catch(function(error) {
 
-            console.error(
-              "Erreur Service Worker :",
-              error
-            );
+              console.error(
+                "Service Worker :",
+                error
+              );
 
-          });
+            });
 
-      });
+        }
+      );
 
     }
 
 
-    /* Splash screen */
+    window.addEventListener(
+      "load",
+      function() {
 
-    window.addEventListener("load", function() {
+        setTimeout(
+          function() {
 
-      setTimeout(function() {
+            const splash =
+              document.getElementById("splash");
 
-        const splash =
-          document.getElementById("splash");
+            if (splash) {
 
-        if (splash) {
+              splash.classList.add("hidden");
 
-          splash.classList.add("hidden");
+              setTimeout(
+                () => splash.remove(),
+                500
+              );
 
-          setTimeout(function() {
-            splash.remove();
-          }, 500);
+            }
 
-        }
+          },
+          1500
+        );
 
-      }, 1200);
-
-    });
+      }
+    );
 
   </script>
 

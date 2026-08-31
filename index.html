@@ -2,55 +2,252 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#10151d">
-  <meta name="description" content="Fils & Filles — Grandir en Christ. Une application de croissance spirituelle créée par Jonathan Mwaka.">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="style.css">
-  <title>Fils & Filles — Grandir en Christ</title>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta name="theme-color" content="#111827">
+  <meta name="background-color" content="#111827">
+  <meta name="description" content="PORTEURS DU MANTEAU JJM — La vérité qui impacte.">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <title>PORTEURS DU MANTEAU JJM</title>
 </head>
+
 <body>
+
+  <!-- Écran de démarrage -->
+  <div id="splash">
+    <div class="splash-logo">✝</div>
+    <h1>PORTEURS DU MANTEAU</h1>
+    <p>LA VÉRITÉ QUI IMPACTE</p>
+    <div class="loader"></div>
+  </div>
+
+  <!-- Application -->
   <div id="app">
-    <header class="topbar">
-      <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
-      <div class="brand-mini">
-        <strong>FILS & FILLES</strong>
-        <span>Grandir en Christ</span>
+
+    <header class="app-header">
+
+      <div class="brand">
+        <div class="brand-icon">✝</div>
+
+        <div>
+          <strong>PORTEURS DU MANTEAU</strong>
+          <small>LA VÉRITÉ QUI IMPACTE</small>
+        </div>
       </div>
-      <button class="icon-btn" id="notifyBtn" aria-label="Notifications">🔔</button>
+
+      <button
+        id="installButton"
+        class="install-button"
+        style="display:none;"
+        aria-label="Installer l'application">
+        ⬇️
+      </button>
+
     </header>
 
-    <main id="screen"></main>
 
-    <nav class="bottom-nav">
-      <button data-screen="home" class="nav-item active"><span>⌂</span><small>Accueil</small></button>
-      <button data-screen="teachings" class="nav-item"><span>▣</span><small>Enseign.</small></button>
-      <button data-screen="prayer" class="nav-item"><span>🙏</span><small>Prière</small></button>
-      <button data-screen="program" class="nav-item"><span>▦</span><small>Programme</small></button>
-      <button data-screen="profile" class="nav-item"><span>♙</span><small>Profil</small></button>
+    <main id="content"></main>
+
+
+    <!-- Navigation -->
+    <nav class="bottom-navigation">
+
+      <button
+        class="nav-button active"
+        data-page="home"
+        onclick="navigate('home')">
+
+        <span>🏠</span>
+        <small>Accueil</small>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        data-page="teachings"
+        onclick="navigate('teachings')">
+
+        <span>📖</span>
+        <small>Enseignements</small>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        data-page="prayer"
+        onclick="navigate('prayer')">
+
+        <span>🙏</span>
+        <small>Prière</small>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        data-page="challenges"
+        onclick="navigate('challenges')">
+
+        <span>🔥</span>
+        <small>Défis</small>
+
+      </button>
+
+
+      <button
+        class="nav-button"
+        data-page="profile"
+        onclick="navigate('profile')">
+
+        <span>👤</span>
+        <small>Profil</small>
+
+      </button>
+
     </nav>
+
   </div>
 
-  <div id="drawer" class="drawer hidden">
-    <div class="drawer-head">
-      <div class="logo-mark">✝</div>
-      <div><b>FILS & FILLES</b><small>Grandir en Christ</small></div>
-      <button id="closeDrawer">×</button>
-    </div>
-    <button data-screen="home">⌂ Accueil</button>
-    <button data-screen="teachings">▣ Enseignements</button>
-    <button data-screen="prayer">🙏 Prière</button>
-    <button data-screen="program">▦ Programme</button>
-    <button data-screen="members">👥 Fils & filles</button>
-    <button data-screen="challenges">🎯 Défis</button>
-    <button data-screen="testimonies">💬 Témoignages</button>
-    <button data-screen="library">📚 Bibliothèque</button>
-    <button data-screen="profile">♙ Mon profil</button>
-    <div class="creator">Créée par<br><strong>JONATHAN MWAKA</strong></div>
-  </div>
-  <div id="overlay" class="overlay hidden"></div>
 
-  <script src="app.js"></script>
+  <!-- Message -->
+  <div id="toast"></div>
+
+
+  <!-- JavaScript principal -->
+  <script src="./app.js"></script>
+
+
+  <!-- Installation PWA -->
+  <script>
+
+    let deferredPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", function(event) {
+
+      event.preventDefault();
+
+      deferredPrompt = event;
+
+      const installButton =
+        document.getElementById("installButton");
+
+      if (installButton) {
+        installButton.style.display = "block";
+      }
+
+    });
+
+
+    const installButton =
+      document.getElementById("installButton");
+
+    if (installButton) {
+
+      installButton.addEventListener("click", async function() {
+
+        if (!deferredPrompt) {
+          showToast("L'installation n'est pas encore disponible.");
+          return;
+        }
+
+        deferredPrompt.prompt();
+
+        const result =
+          await deferredPrompt.userChoice;
+
+        if (result.outcome === "accepted") {
+          showToast("Application installée !");
+        }
+
+        deferredPrompt = null;
+
+        installButton.style.display = "none";
+
+      });
+
+    }
+
+
+    window.addEventListener("appinstalled", function() {
+
+      const installButton =
+        document.getElementById("installButton");
+
+      if (installButton) {
+        installButton.style.display = "none";
+      }
+
+      showToast("PORTEURS DU MANTEAU est installé !");
+
+    });
+
+
+    /* Service Worker */
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener("load", function() {
+
+        navigator.serviceWorker
+          .register("./service-worker.js", {
+            scope: "./"
+          })
+          .then(function(registration) {
+
+            console.log(
+              "Service Worker actif :",
+              registration.scope
+            );
+
+          })
+          .catch(function(error) {
+
+            console.error(
+              "Erreur Service Worker :",
+              error
+            );
+
+          });
+
+      });
+
+    }
+
+
+    /* Splash screen */
+
+    window.addEventListener("load", function() {
+
+      setTimeout(function() {
+
+        const splash =
+          document.getElementById("splash");
+
+        if (splash) {
+
+          splash.classList.add("hidden");
+
+          setTimeout(function() {
+            splash.remove();
+          }, 500);
+
+        }
+
+      }, 1200);
+
+    });
+
+  </script>
+
 </body>
 </html>
